@@ -5,9 +5,9 @@ const TrendChart = ({ data }) => (
   <div className="bg-white p-4 rounded shadow">
     <h3 className="mb-2 font-semibold">Price Trend</h3>
     <ResponsiveContainer width="100%" height={200}>
-      <LineChart data={data}>
+      <LineChart data={data.map(item => ({ ...item, yearMonth: `${item.year}-${String(item.month).padStart(2, '0')}` }))}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="month" />
+        <XAxis dataKey="yearMonth" />
         <YAxis />
         <Tooltip />
         <Line type="monotone" dataKey="price" stroke="#2563eb" strokeWidth={2} />

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.model_selection import TimeSeriesSplit
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import LabelEncoder
 import joblib
 import shap
@@ -36,8 +36,16 @@ joblib.dump(None, 'models/target_encoder.pkl')
 
 # Evaluate
 y_pred = model.predict(X_test)
+
 mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred)
+
 print(f"Test MSE: {mse:.2f}")
+print(f"Test RMSE: {rmse:.2f}")
+print(f"Test MAE: {mae:.2f}")
+print(f"Test R^2: {r2:.4f}")
 
 # SHAP summary
 explainer = shap.Explainer(model)
