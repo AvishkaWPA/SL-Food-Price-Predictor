@@ -22,8 +22,8 @@ split_idx = int(len(X) * 0.8)
 X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
 y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
 
-# Model training
-model = HistGradientBoostingRegressor()
+# Model training with tuned learning rate
+model = HistGradientBoostingRegressor(learning_rate=0.03)
 model.fit(X_train, y_train)
 
 
